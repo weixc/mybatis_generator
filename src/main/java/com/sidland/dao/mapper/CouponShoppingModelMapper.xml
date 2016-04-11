@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sidland.dao.CouponShoppingModelMapper" >
+  <resultMap id="BaseResultMap" type="com.sidland.po.CouponShoppingModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="act_name" property="actName" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="stime" property="stime" jdbcType="INTEGER" />
+    <result column="etime" property="etime" jdbcType="INTEGER" />
+    <result column="act_status" property="actStatus" jdbcType="SMALLINT" />
+    <result column="range_type" property="rangeType" jdbcType="SMALLINT" />
+    <result column="send_dim" property="sendDim" jdbcType="TINYINT" />
+    <result column="paysn_type" property="paysnType" jdbcType="TINYINT" />
+    <result column="paysn_cond" property="paysnCond" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sidland.po.CouponShoppingModelWithBLOBs" extends="BaseResultMap" >
+    <result column="range_val" property="rangeVal" jdbcType="LONGVARCHAR" />
+    <result column="paysn_cont" property="paysnCont" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, act_name, coupon_id, stime, etime, act_status, range_type, send_dim, paysn_type, 
+    paysn_cond
+  </sql>
+  <sql id="Blob_Column_List" >
+    range_val, paysn_cont
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cc_coupon_shopping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cc_coupon_shopping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sidland.po.CouponShoppingModelWithBLOBs" >
+    insert into cc_coupon_shopping (id, act_name, coupon_id, 
+      stime, etime, act_status, 
+      range_type, send_dim, paysn_type, 
+      paysn_cond, range_val, paysn_cont
+      )
+    values (#{id,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{couponId,jdbcType=INTEGER}, 
+      #{stime,jdbcType=INTEGER}, #{etime,jdbcType=INTEGER}, #{actStatus,jdbcType=SMALLINT}, 
+      #{rangeType,jdbcType=SMALLINT}, #{sendDim,jdbcType=TINYINT}, #{paysnType,jdbcType=TINYINT}, 
+      #{paysnCond,jdbcType=TINYINT}, #{rangeVal,jdbcType=LONGVARCHAR}, #{paysnCont,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sidland.po.CouponShoppingModelWithBLOBs" >
+    insert into cc_coupon_shopping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="actName != null" >
+        act_name,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="stime != null" >
+        stime,
+      </if>
+      <if test="etime != null" >
+        etime,
+      </if>
+      <if test="actStatus != null" >
+        act_status,
+      </if>
+      <if test="rangeType != null" >
+        range_type,
+      </if>
+      <if test="sendDim != null" >
+        send_dim,
+      </if>
+      <if test="paysnType != null" >
+        paysn_type,
+      </if>
+      <if test="paysnCond != null" >
+        paysn_cond,
+      </if>
+      <if test="rangeVal != null" >
+        range_val,
+      </if>
+      <if test="paysnCont != null" >
+        paysn_cont,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="actName != null" >
+        #{actName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=INTEGER},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=INTEGER},
+      </if>
+      <if test="actStatus != null" >
+        #{actStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="rangeType != null" >
+        #{rangeType,jdbcType=SMALLINT},
+      </if>
+      <if test="sendDim != null" >
+        #{sendDim,jdbcType=TINYINT},
+      </if>
+      <if test="paysnType != null" >
+        #{paysnType,jdbcType=TINYINT},
+      </if>
+      <if test="paysnCond != null" >
+        #{paysnCond,jdbcType=TINYINT},
+      </if>
+      <if test="rangeVal != null" >
+        #{rangeVal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paysnCont != null" >
+        #{paysnCont,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sidland.po.CouponShoppingModelWithBLOBs" >
+    update cc_coupon_shopping
+    <set >
+      <if test="actName != null" >
+        act_name = #{actName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="stime != null" >
+        stime = #{stime,jdbcType=INTEGER},
+      </if>
+      <if test="etime != null" >
+        etime = #{etime,jdbcType=INTEGER},
+      </if>
+      <if test="actStatus != null" >
+        act_status = #{actStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="rangeType != null" >
+        range_type = #{rangeType,jdbcType=SMALLINT},
+      </if>
+      <if test="sendDim != null" >
+        send_dim = #{sendDim,jdbcType=TINYINT},
+      </if>
+      <if test="paysnType != null" >
+        paysn_type = #{paysnType,jdbcType=TINYINT},
+      </if>
+      <if test="paysnCond != null" >
+        paysn_cond = #{paysnCond,jdbcType=TINYINT},
+      </if>
+      <if test="rangeVal != null" >
+        range_val = #{rangeVal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paysnCont != null" >
+        paysn_cont = #{paysnCont,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sidland.po.CouponShoppingModelWithBLOBs" >
+    update cc_coupon_shopping
+    set act_name = #{actName,jdbcType=VARCHAR},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      stime = #{stime,jdbcType=INTEGER},
+      etime = #{etime,jdbcType=INTEGER},
+      act_status = #{actStatus,jdbcType=SMALLINT},
+      range_type = #{rangeType,jdbcType=SMALLINT},
+      send_dim = #{sendDim,jdbcType=TINYINT},
+      paysn_type = #{paysnType,jdbcType=TINYINT},
+      paysn_cond = #{paysnCond,jdbcType=TINYINT},
+      range_val = #{rangeVal,jdbcType=LONGVARCHAR},
+      paysn_cont = #{paysnCont,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sidland.po.CouponShoppingModel" >
+    update cc_coupon_shopping
+    set act_name = #{actName,jdbcType=VARCHAR},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      stime = #{stime,jdbcType=INTEGER},
+      etime = #{etime,jdbcType=INTEGER},
+      act_status = #{actStatus,jdbcType=SMALLINT},
+      range_type = #{rangeType,jdbcType=SMALLINT},
+      send_dim = #{sendDim,jdbcType=TINYINT},
+      paysn_type = #{paysnType,jdbcType=TINYINT},
+      paysn_cond = #{paysnCond,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

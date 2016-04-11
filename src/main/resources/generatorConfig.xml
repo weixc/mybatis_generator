@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入属性配置 -->
+    <properties resource="generator.properties"></properties>
+
+    <!--指定特定数据库的jdbc驱动jar包的位置-->
+    <!--<classPathEntry location="${jdbc.driverLocation}"/>-->
+    <classPathEntry location="/Users/MLS/documents/culiurepo/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37.jar" />
+
+    <context id="default" targetRuntime="MyBatis3">
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+            <property name="generateColumnComments" value="true" /> <!-- 是否从数据库生成字段的注释 -->
+            <property name="authorName" value="haozi" />
+            <!--<property name="dateFormat" value="yyyy-MM-dd" />--><!-- 默认类前的格式为 yyyy-MM-dd HH:mm -->
+        </commentGenerator>
+
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.connectionURL}" userId="${jdbc.userId}" password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.sidland.po"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+
+
+        <sqlMapGenerator targetPackage="com.sidland.dao.mapper"
+                         targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.sidland.dao"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+
+        <table tableName="cc_coupon_shopping" domainObjectName="CouponShoppingModel"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+
+    </context>
+</generatorConfiguration>
